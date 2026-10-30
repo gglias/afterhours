@@ -184,7 +184,9 @@
     const emptyEl = $("[data-empty]", receipt);
     const founding = $("[data-founding]", receipt);
     const send = $("[data-send]", receipt);
+    const mailLink = $("[data-send-mail]", receipt);
     const bar = $("[data-receipt-bar]");
+    let request = {};                                  // what the receipt holds, handed to the form as hidden fields
     const items = $$("[data-item]");
     const picked = new Set((store.get("ah-receipt") || "").split(",").filter(Boolean));
     founding.checked = store.get("ah-founding") === "1";
@@ -234,7 +236,14 @@
         "What I want to improve:",
         "",
       ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
-      send.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Request: ${chosen.map((el) => el.dataset.name).join(", ") || "After hours"}`)}&body=${encodeURIComponent(body)}`;
+      if (mailLink) mailLink.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Request: ${chosen.map((el) => el.dataset.name).join(", ") || "After hours"}`)}&body=${encodeURIComponent(body)}`;
+      // the form: a popup over the page (Tally widget); without the widget the link opens the form in a new tab
+      request = {
+        services: chosen.map((el) => `${el.dataset.name} (${el.hasAttribute("data-from") ? "from " : ""}${eur(+el.dataset.price)}${el.dataset.unit || ""})`).join("; "),
+        total: (anyFrom ? "from " : "") + eur(sub - disc) + (monthly ? " (1st month)" : ""),
+        founding: founding.checked ? "yes" : "no",
+      };
+      send.href = `https://tally.so/r/${send.dataset.tally}?${new URLSearchParams(request)}`;
       send.setAttribute("aria-disabled", chosen.length ? "false" : "true");
       send.classList.toggle("is-disabled", !chosen.length);
 
@@ -270,6 +279,18 @@
     });
     founding.addEventListener("change", render);
     send.addEventListener("click", (e) => {
+      if (!picked.size) { e.preventDefault(); toast("Add something from the menu first"); return; }
+      if (!window.Tally || !Tally.openPopup) return;
+      e.preventDefault();
+      Tally.openPopup(send.dataset.tally, {
+        layout: "modal",
+        width: 560,
+        hiddenFields: request,
+        autoClose: 4000,
+        onSubmit: () => toast("Request sent. I'll reply within 24h on weekdays."),
+      });
+    });
+    if (mailLink) mailLink.addEventListener("click", (e) => {
       if (!picked.size) { e.preventDefault(); toast("Add something from the menu first"); }
     });
     render();
