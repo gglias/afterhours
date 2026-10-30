@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompts — After hours by Greg Glias</title>
+  <meta name="description" content="Prompts I use for UX audits, microcopy and developer handoffs, and things I build with Claude. Copy and use them.">
+  <meta name="theme-color" content="#f2efe7">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=1">
+  <script>try{var t=localStorage.getItem("ah-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><span class="brand-mark">GG</span>After hours <small>by Greg Glias</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../#menu">Menu</a>
+      <a href="../#how">How it works</a>
+      <a href="../#pricing">How I charge</a>
+      <a href="./" aria-current="page">Prompts</a>
+      <a href="../#faq">FAQ</a>
+    </nav>
+    <div class="header-tools">
+      <span class="status" data-status><span class="status-dot"></span><span data-status-text>Athens time</span></span>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title" style="padding-bottom:40px">
+    <div class="wrap" style="display:block">
+      <p class="eyebrow">prompts &amp; experiments</p>
+      <h1 id="hero-title">One prompt in, <em>real work out.</em></h1>
+      <p class="hero-lead">The prompts I use in my own audits and handoffs, and things I build with Claude in the evenings. Copy them, change them, use them on your product.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="prompts-title" style="padding-top:0">
+    <div class="wrap">
+      <h2 id="prompts-title" class="eyebrow" style="font-weight:400">all prompts</h2>
+      <div class="tabs" role="tablist" data-tabs>
+        <button class="tab" type="button" role="tab" aria-selected="true" data-filter="all">All</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="ux">UX</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="copy">Copy</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="build">Build</button>
+      </div>
+      <div class="prompt-grid" data-prompts></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section aria-labelledby="made-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">made with claude</p>
+          <h2 id="made-title">Things I've built.</h2>
+        </div>
+        <p class="muted">Small tools and experiments, designed by me and built together with Claude.</p>
+      </div>
+      <div class="made-grid" data-made></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="sample">
+        <div>
+          <p class="eyebrow">want the real thing?</p>
+          <h2 id="cta-title">A prompt finds problems. An audit fixes them.</h2>
+          <p class="muted" style="margin-top:14px">Fixed-price UX audits for websites and apps, from €290.</p>
+        </div>
+        <div><a class="btn btn-primary" href="../#menu">See the menu →</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="tiny">© <span data-year>2026</span> Greg Glias · Thessaloniki, Greece</span>
+    <nav aria-label="Elsewhere">
+      <a href="https://gglias.github.io/">Portfolio</a>
+      <a href="https://gglias.github.io/toolkit/">Toolkit</a>
+      <a href="https://github.com/gglias">GitHub</a>
+      <a href="https://www.linkedin.com/in/gglias">LinkedIn</a>
+      <a href="mailto:gglias.pro@gmail.com">Email</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="toast" data-toast role="status"></div>
+
+<script src="../assets/prompts.js?v=1"></script>
+<script src="../assets/site.js?v=1"></script>
+</body>
+</html>

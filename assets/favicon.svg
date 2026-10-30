@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    rect { fill: #f2efe7; stroke: #231e16; }
+    text { fill: #231e16; }
+    @media (prefers-color-scheme: dark) { rect { fill: #14130f; stroke: #eee8da; } text { fill: #eee8da; } }
+  </style>
+  <rect x="3" y="3" width="58" height="58" rx="16" stroke-width="4"/>
+  <text x="32" y="41" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="24" font-weight="700" letter-spacing="-1">GG</text>
+</svg>
