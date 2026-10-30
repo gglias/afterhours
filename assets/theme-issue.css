@@ -1,0 +1,157 @@
+/* Issue: the site as a magazine issue. Instrument Serif for display, Inter for reading, Consolas for details.
+   White paper and one vermilion accent; dark mode is the "night edition". */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:opsz,wght@14..32,400..800&display=swap");
+
+:root {
+  --paper: #fbfaf7;
+  --paper-2: #f1efe9;
+  --card: #ffffff;
+  --ink: #141414;
+  --ink-2: #4a4a47;
+  --ink-3: #85837c;
+  --line: #dedbd2;
+  --accent: #d83a1e;
+  --accent-ink: #ffffff;
+  --accent-soft: #fbe4dd;
+  --open: #17804a;
+  --closed: #d83a1e;
+  --shadow: none;
+  --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 0px;
+  --lamp-pal: tomato;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121110; --paper-2: #1c1b19; --card: #181715;
+    --ink: #f1eee8; --ink-2: #bdb8ae; --ink-3: #8a857b; --line: #34322e;
+    --accent: #ff7a55; --accent-ink: #121110; --accent-soft: #3a211a;
+    --open: #63d394; --closed: #ff7a55;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121110; --paper-2: #1c1b19; --card: #181715;
+  --ink: #f1eee8; --ink-2: #bdb8ae; --ink-3: #8a857b; --line: #34322e;
+  --accent: #ff7a55; --accent-ink: #121110; --accent-soft: #3a211a;
+  --open: #63d394; --closed: #ff7a55;
+}
+
+body { font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.01em; }
+h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1; }
+h2 { font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; }
+h1 em, h2 em { font-style: italic; color: var(--accent); }
+
+/* mono only for details */
+.eyebrow, .tiny, .item-meta, .tag, .status, .receipt, .studio-clock, .studio-hours, .mast-top, .mast-sub,
+.toc-no, .cut, .copy-line code, .prompt pre, .prompt-head, .receipt-bar, .menu-group > h3, .made-art, .cover-caption span {
+  font-family: var(--mono);
+}
+.eyebrow { display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; color: var(--ink); }
+.eyebrow::before { content: none; }
+.eyebrow::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+
+/* header: quiet, the masthead does the shouting */
+.site-header { background: color-mix(in srgb, var(--paper) 92%, transparent); }
+.site-header.is-scrolled { border-bottom-color: var(--ink); }
+.brand { font-family: var(--serif); font-weight: 400; font-size: 22px; letter-spacing: 0; }
+.brand small { font-family: var(--sans); font-size: 12px; }
+.nav a { font-size: 14px; border-radius: 0; }
+.nav a:hover, .nav a[aria-current="page"] { background: transparent; color: var(--accent); }
+.header-tools .status { display: none; }
+.icon-btn { border-radius: 0; }
+
+/* masthead */
+.hero { padding-top: clamp(20px, 3vw, 36px); }
+.hero .masthead { display: block; margin-bottom: clamp(36px, 5vw, 64px); }
+.mast-top, .mast-sub { display: flex; justify-content: space-between; align-items: center; gap: 8px 18px; flex-wrap: wrap;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink); }
+.mast-top { padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
+.mast-title { font-family: var(--serif); font-size: clamp(64px, 17vw, 236px); line-height: 0.86; letter-spacing: -0.035em;
+  text-align: center; padding: 0.06em 0 0.08em; white-space: nowrap; }
+.mast-sub { padding-top: 10px; border-top: 3px double var(--ink); color: var(--ink-2); }
+.mast-status { display: inline-flex; align-items: center; gap: 8px; }
+.mast-status[data-open="true"] .status-dot { background: var(--open); animation: pulse 2.4s infinite; }
+
+/* hero: cover line on the left, cover illustration on the right */
+.hero .wrap:not(.masthead) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: start; }
+.hero .eyebrow { margin-bottom: 18px; }
+.hero-lead { font-size: 17px; line-height: 1.65; color: var(--ink-2); }
+
+/* buttons: square, ink */
+.btn { border-radius: 0; border-width: 1px; font-family: var(--sans); font-weight: 600; font-size: 14px; }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-sm { font-size: 13px; }
+.copy-line { border-radius: 0; border-color: var(--ink); background: transparent; }
+
+/* the desk as the cover illustration (kept on paper in the night edition, like a print) */
+.studio { --paper-fix: #f4f1ea; border: 0; border-radius: 0; box-shadow: none; background: transparent; color: var(--ink); overflow: visible; }
+.studio-figure { background: #f4f1ea; border: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.cover-caption { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-2); padding: 10px 0 0; }
+.cover-caption span { font-style: normal; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-right: 8px; }
+.studio-bar { padding: 14px 0 0; border-top: 0; }
+.studio-word { font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: 0; color: var(--ink); }
+.studio[data-open="true"] .studio-word, .studio[data-open="false"] .studio-word { color: var(--ink); }
+.studio[data-open="true"] [data-sign-word] { color: var(--open); }
+.studio[data-open="false"] [data-sign-word] { color: var(--closed); }
+.studio .status-dot { display: none; }
+.studio-clock, .studio-note, .studio-hours { color: var(--ink-3); }
+.studio-note { color: var(--ink-2); }
+.studio-hours { padding: 8px 0 0; }
+.studio .btn { color: var(--ink); border-color: var(--ink); }
+.studio .btn:hover { background: var(--paper-2); }
+.studio .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* menu as a contents page */
+.menu-group + .menu-group { margin-top: 48px; }
+.menu-group > h3 { font-size: 11px; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 0; padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
+.items { gap: 0; }
+.item { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; padding: 22px 0 24px; }
+.item:hover { border-color: var(--line); }
+.item.is-selected { border-color: var(--line); box-shadow: inset 3px 0 0 var(--accent); padding-left: 18px; background: transparent; }
+.item-head { gap: 14px; }
+.toc-no { display: inline; font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+.item-head h4 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; line-height: 1.05; }
+.leader { border-bottom: 1px dotted var(--ink-3); transform: translateY(-6px); }
+.price { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 32px); }
+.price small { font-family: var(--sans); font-size: 12px; }
+.item-meta { padding-left: 34px; }
+.item-desc, .item-lists, .item-foot { padding-left: 34px; }
+.item-desc { font-size: 15px; }
+.tag { border-radius: 0; border-color: var(--ink-3); background: transparent; text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+.tag-accent { color: var(--accent); border-color: var(--accent); }
+.add-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* the receipt becomes a tear-out order card */
+.cut { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px; }
+.cut span { font-size: 16px; color: var(--ink); }
+.cut::after { content: ""; flex: 1; border-top: 1px dashed var(--ink-3); }
+.receipt { -webkit-mask: none; mask: none; border: 1.5px dashed var(--ink); border-radius: 0; box-shadow: none; background: var(--card); }
+.receipt-title strong { font-family: var(--serif); font-weight: 400; font-size: 30px; letter-spacing: -0.01em; text-transform: none; }
+.receipt-title strong::after { content: " order card"; font-style: italic; color: var(--accent); }
+.barcode { display: none; }
+.receipt .btn { border-radius: 0; }
+
+/* rest of the page follows the same voice */
+.step, .prompt, .made, .term, .annot, .sample { border-radius: 0; }
+.step { background: transparent; border: 0; border-top: 1px solid var(--ink); padding: 18px 0 0; }
+.step-num { font-family: var(--serif); font-weight: 400; font-size: 44px; color: var(--accent); letter-spacing: 0; }
+.term { border-top: 1px solid var(--ink); }
+.sample { border: 1px solid var(--ink); }
+.faq { border-top: 1px solid var(--ink); }
+.faq summary { font-family: var(--serif); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; }
+.tab { border-radius: 0; }
+.receipt-bar { border-radius: 0; }
+.status { border-radius: 0; }
+
+@media (max-width: 860px) {
+  .hero .wrap:not(.masthead) { grid-template-columns: minmax(0, 1fr); }
+  .studio { max-width: none; }
+}
+@media (max-width: 560px) {
+  .mast-sub span:nth-child(2), .mast-sub span:nth-child(3) { display: none; }
+  .item-meta, .item-desc, .item-lists, .item-foot { padding-left: 0; }
+  .item-head { flex-wrap: wrap; }
+}

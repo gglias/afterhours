@@ -7,12 +7,12 @@
   <meta name="description" content="Fixed-price UX audits for websites and apps, redesign sprints and Figma-to-WordPress builds. Remote, async, in the evenings. Prices in euros.">
   <meta name="theme-color" content="#f2efe7">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=4">
+  <link rel="stylesheet" href="assets/styles.css?v=5">
   <!-- PREVIEW ONLY: theme comparison (remove when a direction is chosen) -->
   <script data-theme-preview>(function(){var q=new URLSearchParams(location.search).get("theme"),k="ah-skin",t=q;try{if(q)sessionStorage.setItem(k,q);else t=sessionStorage.getItem(k)}catch(e){}
-  if(t==="blueprint"||t==="blocks")document.write('<link rel="stylesheet" href="assets/theme-'+t+'.css?v=3">');
+  if(t!=="now"){t="issue";document.write('<link rel="stylesheet" href="assets/theme-issue.css?v=2">')}
   addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.style.cssText="position:fixed;left:12px;bottom:12px;z-index:99;display:flex;gap:4px;padding:4px;background:#111;border-radius:999px;font:600 11px ui-monospace,Menlo,Consolas,monospace";
-  [["now","Now"],["blueprint","Blueprint"],["blocks","Blocks"]].forEach(function(o){var a=document.createElement("a");a.textContent=o[1];a.href="?theme="+o[0];a.style.cssText="color:#fff;text-decoration:none;padding:5px 10px;border-radius:999px;"+((t||"now")===o[0]?"background:#fff;color:#111":"");d.appendChild(a)});document.body.appendChild(d)})})();</script>
+  [["issue","Issue"],["now","Now"]].forEach(function(o){var a=document.createElement("a");a.textContent=o[1];a.href="?theme="+o[0];a.style.cssText="color:#fff;text-decoration:none;padding:5px 10px;border-radius:999px;"+(t===o[0]?"background:#fff;color:#111":"");d.appendChild(a)});document.body.appendChild(d)})})();</script>
   <script>try{var t=localStorage.getItem("ah-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
@@ -40,6 +40,11 @@
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-title">
+    <div class="masthead wrap">
+      <p class="mast-top"><span>Issue 01</span><span>Autumn 2026</span><span class="mast-status" data-status><span class="status-dot"></span><span data-status-text>Athens time</span></span></p>
+      <p class="mast-title" aria-hidden="true">After hours</p>
+      <p class="mast-sub"><span>UX audits</span><span>Redesign sprints</span><span>Figma → WordPress</span><span>by Greg Glias</span></p>
+    </div>
     <div class="wrap">
       <div>
         <p class="eyebrow">remote · async · evenings, Athens time</p>
@@ -59,6 +64,7 @@
         <div class="studio-figure">
           <iframe data-lamp title="My desk, drawn in 3D: drag to turn it round, press the switch on the lamp base" loading="lazy"></iframe>
         </div>
+        <p class="cover-caption"><span>On the cover</span> My desk after 19:00. Drag to turn it round, or flip the lights.</p>
         <div class="studio-bar" aria-live="polite">
           <div>
             <p class="studio-word"><span class="status-dot"></span><span data-sign-word>Closed</span> <span class="studio-clock" data-clock>--:--</span></p>
@@ -125,7 +131,7 @@
             <div class="items">
 
               <article class="item reveal" data-item="quick-scan" data-name="UX Quick Scan" data-price="290">
-                <div class="item-head"><h4>UX Quick Scan</h4><span class="leader"></span><span class="price">€290</span></div>
+                <div class="item-head"><span class="toc-no">01</span><h4>UX Quick Scan</h4><span class="leader"></span><span class="price">€290</span></div>
                 <div class="item-meta"><span>3 working days</span><span>1 page or 1 flow</span><span>100% upfront</span></div>
                 <p class="item-desc">A fast, honest look at one landing page or one flow. Good before a launch or an ad campaign.</p>
                 <div class="item-lists">
@@ -136,7 +142,7 @@
               </article>
 
               <article class="item reveal" data-item="audit-web" data-name="UX Audit: Website" data-price="790">
-                <div class="item-head"><h4>UX Audit: Website</h4><span class="leader"></span><span class="price">€790</span></div>
+                <div class="item-head"><span class="toc-no">02</span><h4>UX Audit: Website</h4><span class="leader"></span><span class="price">€790</span></div>
                 <div class="item-meta"><span>5–7 working days</span><span>up to 10 key pages</span><span>50 / 50</span></div>
                 <p class="item-desc">A full review of the pages that matter: home, product, pricing, sign-up, checkout. What's broken, what's confusing and what to fix first.</p>
                 <div class="item-lists">
@@ -147,7 +153,7 @@
               </article>
 
               <article class="item reveal" data-item="audit-app" data-name="UX Audit: App" data-price="1190">
-                <div class="item-head"><h4>UX Audit: App</h4><span class="leader"></span><span class="price">€1,190</span></div>
+                <div class="item-head"><span class="toc-no">03</span><h4>UX Audit: App</h4><span class="leader"></span><span class="price">€1,190</span></div>
                 <div class="item-meta"><span>7–10 working days</span><span>2–3 core flows</span><span>50 / 50</span></div>
                 <p class="item-desc">iOS, Android (Flutter too) or web app. Onboarding, checkout, settings: the flows your users go through every day.</p>
                 <div class="item-lists">
@@ -165,7 +171,7 @@
             <div class="items">
 
               <article class="item reveal" data-item="sprint" data-name="Redesign sprint" data-price="1500" data-from>
-                <div class="item-head"><h4>Redesign sprint</h4><span class="leader"></span><span class="price"><small>from</small> €1,500</span></div>
+                <div class="item-head"><span class="toc-no">04</span><h4>Redesign sprint</h4><span class="leader"></span><span class="price"><small>from</small> €1,500</span></div>
                 <div class="item-meta"><span>1–2 weeks</span><span>scope agreed upfront</span><span>50 / 50</span></div>
                 <p class="item-desc">Fix the top issues from an audit, in Figma, ready for your developers to build.</p>
                 <div class="item-lists">
@@ -176,7 +182,7 @@
               </article>
 
               <article class="item reveal" data-item="wp-build" data-name="Figma → WordPress" data-price="1200" data-from>
-                <div class="item-head"><h4>Figma → WordPress</h4><span class="leader"></span><span class="price"><small>from</small> €1,200</span></div>
+                <div class="item-head"><span class="toc-no">05</span><h4>Figma → WordPress</h4><span class="leader"></span><span class="price"><small>from</small> €1,200</span></div>
                 <div class="item-meta"><span>1–3 weeks</span><span>landing page or small site</span><span>50 / 50</span></div>
                 <p class="item-desc">Your Figma design built as a responsive WordPress site with Elementor that your team can edit.</p>
                 <div class="item-lists">
@@ -194,7 +200,7 @@
             <div class="items">
 
               <article class="item reveal" data-item="retainer" data-name="Night shift retainer" data-price="1000" data-unit="/mo">
-                <div class="item-head"><h4>Night shift retainer</h4><span class="leader"></span><span class="price">€1,000 <small>/ month</small></span></div>
+                <div class="item-head"><span class="toc-no">06</span><h4>Night shift retainer</h4><span class="leader"></span><span class="price">€1,000 <small>/ month</small></span></div>
                 <div class="item-meta"><span>20 hours a month</span><span>≈ €50 / hour</span><span>prepaid monthly</span></div>
                 <p class="item-desc">A senior designer a few evenings a week. Use the hours for design, audits or small fixes. Unused hours roll over one month.</p>
                 <div class="item-lists">
@@ -210,6 +216,7 @@
 
         <!-- Receipt -->
         <aside class="receipt-col" id="receipt" aria-label="Your receipt">
+          <p class="cut" aria-hidden="true"><span>✂</span> cut along the line</p>
           <div class="receipt">
             <div class="receipt-title">
               <strong>AFTER HOURS</strong>
@@ -358,6 +365,6 @@
 <div class="toast" data-toast role="status"></div>
 
 <script src="assets/prompts.js?v=1"></script>
-<script src="assets/site.js?v=2"></script>
+<script src="assets/site.js?v=3"></script>
 </body>
 </html>

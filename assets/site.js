@@ -99,7 +99,8 @@
     if (!lampFrame) return;
     const sign = open ? "open" : "closed";
     if (!lampFrame.getAttribute("src")) {
-      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}`;
+      const pal = getComputedStyle(document.documentElement).getPropertyValue("--lamp-pal").trim();
+      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}${pal ? "&pal=" + pal : ""}`;
       setLampBtn(open);
     } else if (open !== lastOpen) {
       lampFrame.contentWindow.postMessage({ type: "lamp", on: open, sign }, location.origin);

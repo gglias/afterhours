@@ -141,6 +141,9 @@ p { margin: 0; }
 .btn-sm { min-height: 32px; padding: 0 14px; font-size: 12px; border-width: 1px; }
 .btn[disabled], .btn.is-disabled { opacity: .45; }
 
+/* parts only the "Issue" look shows */
+.masthead, .cover-caption, .toc-no, .cut { display: none; }
+
 /* ---------- Hero ---------- */
 .hero { padding: clamp(48px, 8vw, 96px) 0 clamp(56px, 8vw, 104px); }
 .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
