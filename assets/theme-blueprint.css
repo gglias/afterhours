@@ -1,6 +1,6 @@
-/* Blueprint: a spec sheet on grid paper. Sans for reading (IBM Plex Sans), mono only for details.
+/* Blueprint: a spec sheet on grid paper. Sans for reading (Inter), mono only for details.
    Light = white drafting paper with a blue grid; dark = a real blueprint (navy, white lines). */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap");
 
 :root {
   --paper: #f6f8fc;
@@ -18,7 +18,7 @@
   --grid: rgba(36, 70, 216, 0.07);
   --grid-2: rgba(36, 70, 216, 0.13);
   --shadow: none;
-  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --radius: 2px;
   --pill: 2px;
 }
