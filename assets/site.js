@@ -186,7 +186,7 @@
     const send = $("[data-send]", receipt);
     const mailLink = $("[data-send-mail]", receipt);
     const bar = $("[data-receipt-bar]");
-    let request = {};                                  // what the receipt holds, handed to the form as hidden fields
+    let request = {};                                  // what the brief holds, handed to the form as hidden fields
     const items = $$("[data-item]");
     const picked = new Set((store.get("ah-receipt") || "").split(",").filter(Boolean));
     founding.checked = store.get("ah-founding") === "1";
@@ -201,7 +201,7 @@
         el.classList.toggle("is-selected", on);
         const b = $(".add-btn", el);
         b.setAttribute("aria-pressed", on);
-        b.textContent = on ? "Added ✓" : "Add to receipt";
+        b.textContent = on ? "Added ✓" : "Add to brief";
       });
 
       linesEl.innerHTML = chosen.map((el) => {
@@ -225,7 +225,7 @@
       const body = [
         "Hi Greg,",
         "",
-        "I'd like to start with:",
+        "I'm interested in:",
         ...chosen.map((el) => `- ${el.dataset.name} (${el.hasAttribute("data-from") ? "from " : ""}${eur(+el.dataset.price)}${el.dataset.unit || ""})`),
         founding.checked ? "- Founding client −25% (happy to give a testimonial)" : "",
         "",
@@ -236,7 +236,7 @@
         "What I want to improve:",
         "",
       ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
-      if (mailLink) mailLink.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Request: ${chosen.map((el) => el.dataset.name).join(", ") || "After hours"}`)}&body=${encodeURIComponent(body)}`;
+      if (mailLink) mailLink.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Inquiry: ${chosen.map((el) => el.dataset.name).join(", ") || "After hours"}`)}&body=${encodeURIComponent(body)}`;
       // the form: a popup over the page (Tally widget); without the widget the link opens the form in a new tab
       request = {
         services: chosen.map((el) => `${el.dataset.name} (${el.hasAttribute("data-from") ? "from " : ""}${eur(+el.dataset.price)}${el.dataset.unit || ""})`).join("; "),
@@ -287,7 +287,7 @@
         width: 560,
         hiddenFields: request,
         autoClose: 4000,
-        onSubmit: () => toast("Request sent. I'll reply within 24h on weekdays."),
+        onSubmit: () => toast("Inquiry sent. I'll reply within 24h on weekdays."),
       });
     });
     if (mailLink) mailLink.addEventListener("click", (e) => {

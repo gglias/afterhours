@@ -492,13 +492,13 @@ body:has(.masthead) .header-tools .status { display: none; }
 .tag-accent { color: var(--accent); border-color: var(--accent); }
 .add-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
-/* the receipt becomes a tear-out order card */
+/* the receipt becomes a tear-out project brief */
 .cut { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px; }
 .cut span { font-size: 16px; color: var(--ink); }
 .cut::after { content: ""; flex: 1; border-top: 1px dashed var(--ink-3); }
 .receipt { -webkit-mask: none; mask: none; border: 1.5px dashed var(--ink); border-radius: 0; box-shadow: none; background: var(--card); }
 .receipt-title strong { font-family: var(--serif); font-weight: 400; font-size: 30px; letter-spacing: -0.01em; text-transform: none; }
-.receipt-title strong::after { content: " order card"; font-style: italic; color: var(--accent); }
+.receipt-title strong::after { content: " project brief"; font-style: italic; color: var(--accent); }
 .barcode { display: none; }
 .receipt .btn { border-radius: 0; }
 
