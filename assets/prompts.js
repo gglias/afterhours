@@ -71,7 +71,7 @@ window.MADE = [
   },
   {
     title: "This site",
-    desc: "After hours: the menu, the receipt and this page, designed and built with Claude Code.",
+    desc: "After hours: the menu, the project brief and this page, designed and built with Claude Code.",
     href: "../",
     art: "AH",
   },

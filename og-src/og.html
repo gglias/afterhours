@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>After hours: social preview (1200×630)</title>
+<!-- Source of assets/og.png. Render: headless Chrome, --window-size=1200,630, --screenshot. desk.png = the hero desk, lit, transparent background. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #fbfaf7; color: #141414; font-family: "Inter", sans-serif; display: grid; grid-template-columns: 610px 590px; }
+  .text { padding: 52px 48px 44px 60px; display: flex; flex-direction: column; }
+  .mono { font-family: Consolas, "Courier New", monospace; font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .top { display: flex; justify-content: space-between; padding-bottom: 14px; border-bottom: 1.5px solid #141414; }
+  .top .open { color: #17804a; }
+  .top .open::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #17804a; margin-right: 9px; vertical-align: 1px; }
+  h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 132px; line-height: 0.9; letter-spacing: -0.035em; margin: 34px 0 20px; }
+  .rule { border-top: 4px double #141414; padding-top: 18px; }
+  .lead { font-family: "Instrument Serif", serif; font-size: 36px; line-height: 1.12; }
+  .lead em { color: #d83a1e; }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; color: #4a4a47; font-size: 14px; }
+  .art { position: relative; background: #f4f1ea; border-left: 1.5px solid #141414; overflow: hidden; }
+  .art img { position: absolute; width: 749px; left: -132px; top: -58px; }
+  .cap { position: absolute; left: 28px; bottom: 26px; font-size: 13px; color: #d83a1e; }
+</style>
+</head>
+<body>
+  <div class="text">
+    <p class="top mono"><span>Issue 01</span><span class="open">Open after 19:00</span></p>
+    <h1>After hours</h1>
+    <div class="rule">
+      <p class="lead">UX audits, redesign sprints &amp; Figma&nbsp;→&nbsp;WordPress, <em>in the evenings.</em></p>
+    </div>
+    <p class="foot mono"><span>by Greg Glias</span><span>Fixed prices · async</span></p>
+  </div>
+  <div class="art">
+    <img src="desk.png" alt="">
+    <p class="cap mono">On the cover: my desk</p>
+  </div>
+</body>
+</html>
