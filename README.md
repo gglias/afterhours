@@ -2,7 +2,7 @@
 
 Fixed-price UX audits, redesign sprints and Figma-to-WordPress builds by Greg Glias. Remote, async, in the evenings.
 
-Live: https://gglias.github.io/services/
+Live: https://gglias.github.io/afterhours/ (repo gglias/afterhours)
 
 ## Structure
 
