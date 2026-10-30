@@ -7,7 +7,7 @@
   <meta name="description" content="Fixed-price UX audits for websites and apps, redesign sprints and Figma-to-WordPress builds. Remote, async, in the evenings. Prices in euros.">
   <meta name="theme-color" content="#f2efe7">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=1">
+  <link rel="stylesheet" href="assets/styles.css?v=3">
   <script>try{var t=localStorage.getItem("ah-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
@@ -50,19 +50,19 @@
         </div>
       </div>
 
-      <div class="sign-wrap" aria-live="polite">
-        <svg class="sign-string" viewBox="0 0 120 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="60" cy="6" r="4"/><path d="M57 9 18 44M63 9l39 35"/>
-        </svg>
-        <div class="sign" data-sign data-open="false">
-          <div class="sign-top"><span>Studio hours</span><span class="sign-clock" data-clock>--:--</span></div>
-          <p class="sign-word" data-sign-word>Closed</p>
-          <p class="sign-note" data-sign-note>Leave a note, I'll reply tonight.</p>
-          <div class="sign-hours">
-            <div><span>Mon – Fri</span><span>19:00 – 00:00</span></div>
-            <div><span>Sat – Sun</span><span>Closed</span></div>
-            <div><span>Replies</span><span>within 24h on weekdays</span></div>
+      <div class="studio" data-sign data-open="false">
+        <div class="studio-figure">
+          <iframe data-lamp title="My desk, drawn in 3D: drag to turn it round, press the switch on the lamp base" loading="lazy"></iframe>
+        </div>
+        <div class="studio-bar" aria-live="polite">
+          <div>
+            <p class="studio-word"><span class="status-dot"></span><span data-sign-word>Closed</span> <span class="studio-clock" data-clock>--:--</span></p>
+            <p class="studio-note" data-sign-note>Leave a note, I'll reply tonight.</p>
           </div>
+          <button class="btn btn-sm" type="button" data-lamp-toggle aria-pressed="false">Lights on</button>
+        </div>
+        <div class="studio-hours">
+          <span>Mon – Fri 19:00 – 00:00</span><span>Replies within 24h</span>
         </div>
       </div>
     </div>
@@ -335,7 +335,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="tiny">© <span data-year>2026</span> Greg Glias · Thessaloniki, Greece</span>
+    <span class="tiny">© <span data-year>2026</span> Greg Glias · Thessaloniki, Greece · Desk drawn with <a href="https://april-zhu.com/colorfigures" target="_blank" rel="noopener">Colorfigures</a> (MIT)</span>
     <nav aria-label="Elsewhere">
       <a href="https://gglias.github.io/">Portfolio</a>
       <a href="https://gglias.github.io/toolkit/">Toolkit</a>
@@ -353,6 +353,6 @@
 <div class="toast" data-toast role="status"></div>
 
 <script src="assets/prompts.js?v=1"></script>
-<script src="assets/site.js?v=1"></script>
+<script src="assets/site.js?v=2"></script>
 </body>
 </html>

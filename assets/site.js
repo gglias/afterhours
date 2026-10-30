@@ -84,9 +84,43 @@
     }
     return "soon";
   }
+  /* The desk drawing in the hero: lamp on and screen "OPEN" during studio hours. The visitor can also play with
+     the light (the switch on the lamp base, or the button under the drawing). */
+  const lampFrame = $("[data-lamp]");
+  const lampBtn = $("[data-lamp-toggle]");
+  let lampOn = false, lastOpen = null;
+  function setLampBtn(on) {
+    lampOn = on;
+    if (!lampBtn) return;
+    lampBtn.setAttribute("aria-pressed", on);
+    lampBtn.textContent = on ? "Lights off" : "Lights on";
+  }
+  function driveLamp(open) {
+    if (!lampFrame) return;
+    const sign = open ? "open" : "closed";
+    if (!lampFrame.getAttribute("src")) {
+      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}`;
+      setLampBtn(open);
+    } else if (open !== lastOpen) {
+      lampFrame.contentWindow.postMessage({ type: "lamp", on: open, sign }, location.origin);
+      setLampBtn(open);
+    }
+    lastOpen = open;
+  }
+  addEventListener("message", (e) => {
+    if (e.origin === location.origin && e.data && e.data.type === "lamp-toggled") setLampBtn(!!e.data.on);
+  });
+  if (lampBtn) {
+    lampBtn.addEventListener("click", () => {
+      if (!lampFrame || !lampFrame.contentWindow) return;
+      lampFrame.contentWindow.postMessage({ type: "lamp", on: !lampOn }, location.origin);
+    });
+  }
+
   function updateStatus() {
     const now = athensNow();
     const open = HOURS.days.includes(now.day) && now.h >= HOURS.from && now.h < HOURS.to;
+    driveLamp(open);
     const clock = `${String(now.h).padStart(2, "0")}:${String(now.m).padStart(2, "0")}`;
     $$("[data-status]").forEach((el) => (el.dataset.open = open));
     $$("[data-status-text]").forEach((el) => {
