@@ -197,7 +197,7 @@
     });
   });
   $$("[data-made]").forEach((grid) => {
-    grid.innerHTML = (window.MADE || []).map((m) => `<a class="made surface reveal" href="${m.href}" target="_blank" rel="noopener">
+    grid.innerHTML = (window.MADE || []).map((m) => `<a class="made surface reveal" href="${m.href}"${/^https?:/.test(m.href) ? ' target="_blank" rel="noopener"' : ""}>
       <div class="made-art" aria-hidden="true">${esc(m.art)}</div>
       <h3>${esc(m.title)}</h3><p>${esc(m.desc)}</p><span class="arrow">→</span></a>`).join("");
   });
