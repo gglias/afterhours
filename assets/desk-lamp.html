@@ -1106,6 +1106,14 @@ const ui = mountFigure({
 xrMount(() => ui, XR_CAPTION);
 // on the site the lines stay straight: no hand-drawn wobble
 if (EMBED){ const wob = document.getElementById('wob'); if (wob) wob.setAttribute('scale', '0'); }
+// on the site the starting view comes from ?yaw/&pitch, so the frame (worked out for the default view) can cut the
+// desk: centre the frame on the drawing once it is drawn
+if (EMBED) requestAnimationFrame(() => {
+  const svg = document.getElementById('fig'), art = document.getElementById('art');
+  if (!svg || !art) return;
+  const vb = svg.viewBox.baseVal, bb = art.getBBox();
+  svg.setAttribute('viewBox', `${f(bb.x + bb.width/2 - vb.width/2)} ${f(bb.y + bb.height/2 - vb.height/2)} ${f(vb.width)} ${f(vb.height)}`);
+});
 // the site hero drives the lamp and the screen from Athens time
 addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data || e.data.type !== 'lamp') return;
