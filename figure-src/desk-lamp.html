@@ -461,6 +461,8 @@ const ui = mountFigure({
   },
 });
 xrMount(() => ui, XR_CAPTION);
+// on the site the lines stay straight: no hand-drawn wobble
+if (EMBED){ const wob = document.getElementById('wob'); if (wob) wob.setAttribute('scale', '0'); }
 // the site hero drives the lamp and the screen from Athens time
 addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data || e.data.type !== 'lamp') return;
