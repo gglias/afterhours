@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#09090a">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=10">
+  <link rel="stylesheet" href="assets/styles.css?v=12">
   <script>try{var t=localStorage.getItem("ah-theme");if(t==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
 </head>
 <body>
@@ -56,7 +56,7 @@
         <span class="gg-handle tl"></span><span class="gg-handle tr"></span><span class="gg-handle bl"></span><span class="gg-handle br"></span>
         <span class="gg-size" data-frame-size>0 × 0</span>
       </div>
-      <p class="mast-sub"><span>UX audits</span><span>Redesign sprints</span><span>Figma → WordPress</span><span>by Greg Glias</span></p>
+      <p class="mast-sub"><span>UX audits</span><span>Redesign sprints</span><span>Figma → WordPress</span></p>
     </div>
 
     <div class="wrap hero-grid">
@@ -64,6 +64,7 @@
         <p class="eyebrow">remote · async · evenings, Athens time</p>
         <h1 id="hero-title">UX audits &amp; product design, <em>after&nbsp;hours.</em></h1>
         <p class="hero-lead">I'm Greg, a senior product designer. In the evenings I take on a few small, fixed-price projects: UX audits for websites and apps, redesign sprints and Figma-to-WordPress builds. Everything is async. You get a Loom, a report and a Figma file, not a calendar full of calls.</p>
+        <p class="avail" data-availability></p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#menu">See the menu ↓</a>
           <a class="btn" href="https://gglias.github.io/" target="_blank" rel="noopener">Portfolio ↗</a>
@@ -74,20 +75,22 @@
         </div>
       </div>
 
-      <div class="studio surface" data-sign data-open="false">
+      <div class="studio" data-sign data-open="false">
         <div class="studio-figure">
           <iframe data-lamp title="My desk, drawn in 3D: drag to turn it round, press the switch on the lamp base" loading="lazy"></iframe>
         </div>
         <p class="cover-caption"><span>On the cover</span> My desk after 19:00. Drag to turn it round, or flip the lights.</p>
-        <div class="studio-bar" aria-live="polite">
-          <div>
-            <p class="studio-word"><span class="status-dot"></span><span data-sign-word>Closed</span> <span class="studio-clock" data-clock>--:--</span></p>
-            <p class="studio-note" data-sign-note>Leave a note, I'll reply tonight.</p>
+        <div class="studio-panel surface">
+          <div class="studio-bar" aria-live="polite">
+            <div>
+              <p class="studio-word"><span class="status-dot"></span><span data-sign-word>Closed</span> <span class="studio-clock" data-clock>--:--</span></p>
+              <p class="studio-note" data-sign-note>Leave a note, I'll reply tonight.</p>
+            </div>
+            <button class="btn btn-sm" type="button" data-lamp-toggle aria-pressed="false">Lights on</button>
           </div>
-          <button class="btn btn-sm" type="button" data-lamp-toggle aria-pressed="false">Lights on</button>
-        </div>
-        <div class="studio-hours">
-          <span>Mon – Fri 19:00 – 00:00</span><span>Replies within 24h</span>
+          <div class="studio-hours">
+            <span>Mon – Fri 19:00 – 00:00</span><span>Replies within 24h</span>
+          </div>
         </div>
       </div>
     </div>
@@ -226,6 +229,7 @@
           <p class="eyebrow">prices &amp; availability</p>
           <h2 id="contact-title">Want the price list? Send me an email.</h2>
           <p>Tell me what you need and a few lines about your product. I reply within 24 hours on weekdays with the price list and a written quote.</p>
+          <p class="avail" data-availability></p>
         </div>
         <div class="contact-actions">
           <a class="btn btn-primary" href="mailto:gglias.pro@gmail.com?subject=After%20hours%3A%20price%20list">Email me →</a>
@@ -329,7 +333,8 @@
 
 <div class="toast" data-toast role="status"></div>
 
+<script src="assets/availability.js?v=1"></script>
 <script src="assets/prompts.js?v=2"></script>
-<script src="assets/site.js?v=7"></script>
+<script src="assets/site.js?v=8"></script>
 </body>
 </html>

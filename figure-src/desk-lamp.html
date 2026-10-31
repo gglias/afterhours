@@ -19,6 +19,11 @@ if (EMBED){
     + 'html.embed .stage{max-width:none}html.embed #fig{margin:0;max-width:none}';
   document.head.appendChild(es);
 }
+// ?ink=light (or postMessage { ink }): light ink lines, for a dark page with no paper behind the drawing
+const inkStyle = document.createElement('style'); document.head.appendChild(inkStyle);
+const setInk = mode => { inkStyle.textContent = mode === 'light'
+  ? '#art [stroke="#231e16"]{stroke:#e9e7e1}#art [fill="#231e16"]{fill:#e9e7e1}' : ''; };
+setInk(new URLSearchParams(location.search).get('ink'));
 PALS.ink = { l:'#5b6fdc', m:'#3e52c4', d:'#1f2a6e' };                    // ink blue (laptop sticker)
 PALS.ember = { l:'#ff5b1f', m:'#dc4712', d:'#5c1c08' };                  // the GG Studio accent (lamp on the site)
 
@@ -435,7 +440,7 @@ scene = xrWrap(scene, XR_OPTS);
 const ui = mountFigure({
   fig:'01', turn:'full', title:'Evening desk', hint:'switch the lamp on, then turn the desk round',
   // in the hero there are no buttons to leave room for, so the desk is framed tighter
-  size: EMBED ? [BW*.84, BDP*.84, LAMP_TOP*.9] : [BW, BDP, LAMP_TOP], center:[BW/2, BDP/2], palette:'ink',
+  size: EMBED ? [BW*.76, BDP*.76, LAMP_TOP*.82] : [BW, BDP, LAMP_TOP], center:[BW/2, BDP/2], palette:'ink',
   state:{ on:false, glow:0, pressT:0, pose:'read', tilt:'mid', ang:POSES.read.a.slice(), moving:false, fading:false, sign:'closed' },
   scene,
   readout: st => `${st.on ? 'on' : 'off'} · ${POSES[st.pose].label} · ${TILTS[st.tilt].label}`,
@@ -461,6 +466,7 @@ addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data || e.data.type !== 'lamp') return;
   const st = ui.st;
   if (e.data.sign === 'open' || e.data.sign === 'closed') st.sign = e.data.sign;
+  if (e.data.ink === 'light' || e.data.ink === 'dark') setInk(e.data.ink);
   if (typeof e.data.on === 'boolean' && e.data.on !== st.on) toggle(st, ui);
   ui.render();
 });

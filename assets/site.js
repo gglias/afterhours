@@ -57,8 +57,23 @@
     else delete root.dataset.theme;
     store.set("ah-theme", b.dataset.setTheme);
     showTheme();
+    // the desk drawing has no paper behind it: light ink on the dark canvas, dark ink on the light one
+    const f = $("[data-lamp]");
+    if (f && f.contentWindow && f.getAttribute("src")) f.contentWindow.postMessage({ type: "lamp", ink: inkFor() }, location.origin);
   }));
+  function inkFor() { return document.documentElement.dataset.theme === "light" ? "dark" : "light"; }
   showTheme();
+
+  /* Availability (assets/availability.js) */
+  const AVAIL = { available: "Available", limited: "Limited availability", booked: "Fully booked" };
+  const av = window.AVAILABILITY || {};
+  const avState = AVAIL[av.state] ? av.state : "available";
+  $$("[data-availability]").forEach((el) => {
+    el.dataset.state = avState;
+    el.innerHTML = `<span class="avail-dot"></span><b></b><span></span>`;
+    $("b", el).textContent = AVAIL[avState];
+    if (av.note) $("span:last-child", el).textContent = av.note; else $("span:last-child", el).remove();
+  });
 
   /* Selection frame: live W × H, like Figma */
   const frame = $("[data-frame]");
@@ -111,7 +126,7 @@
     const sign = open ? "open" : "closed";
     if (!lampFrame.getAttribute("src")) {
       const pal = getComputedStyle(document.documentElement).getPropertyValue("--lamp-pal").trim();
-      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}${pal ? "&pal=" + pal : ""}`;
+      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}${pal ? "&pal=" + pal : ""}&ink=${inkFor()}`;
       setLampBtn(open);
     } else if (open !== lastOpen) {
       lampFrame.contentWindow.postMessage({ type: "lamp", on: open, sign }, location.origin);
