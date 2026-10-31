@@ -126,7 +126,7 @@
     const sign = open ? "open" : "closed";
     if (!lampFrame.getAttribute("src")) {
       const pal = getComputedStyle(document.documentElement).getPropertyValue("--lamp-pal").trim();
-      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}${pal ? "&pal=" + pal : ""}&ink=${inkFor()}`;
+      lampFrame.src = `assets/desk-lamp.html?embed=1&sign=${sign}${open ? "&on=1" : ""}${pal ? "&pal=" + pal : ""}&ink=${inkFor()}&yaw=36&pitch=30`;   // starting view: a little more from the front
       setLampBtn(open);
     } else if (open !== lastOpen) {
       lampFrame.contentWindow.postMessage({ type: "lamp", on: open, sign }, location.origin);
