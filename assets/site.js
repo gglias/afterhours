@@ -144,21 +144,60 @@
     });
   }
 
+  // the studio's UTC offset right now ("UTC+2" in winter, "UTC+3" in summer)
+  function utcOffset() {
+    try {
+      const p = new Intl.DateTimeFormat("en-US", { timeZone: TZ, timeZoneName: "shortOffset" }).formatToParts(new Date());
+      const n = (p.find((x) => x.type === "timeZoneName") || {}).value || "GMT+2";
+      return n === "GMT" ? "UTC" : n.replace("GMT", "UTC");
+    } catch (e) { return "UTC+2"; }
+  }
+  const pad2 = (n) => String(n).padStart(2, "0");
+  // the studio hours in the visitor's own time, when that differs
+  function hoursForVisitor(utc) {
+    const studio = (+(utc.match(/[+-]\d+/) || ["0"])[0]) * 60;
+    const mine = -new Date().getTimezoneOffset();
+    const diff = mine - studio;
+    if (!diff) return "";
+    const at = (h) => { const m = ((h * 60 + diff) % 1440 + 1440) % 1440; return `${pad2(Math.floor(m / 60))}:${pad2(m % 60)}`; };
+    return `In your time: ${at(HOURS.from)} – ${at(HOURS.to)}`;
+  }
+  // desktop: hovering the status shows the details
+  function statusTip(el, open, now, utc) {
+    let tip = $(".status-tip", el);
+    if (!tip) {
+      tip = document.createElement("span");
+      tip.className = "status-tip";
+      tip.setAttribute("role", "tooltip");
+      tip.id = "status-tip-" + Math.random().toString(36).slice(2, 7);
+      el.appendChild(tip);
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-describedby", tip.id);
+    }
+    const mine = hoursForVisitor(utc);
+    tip.innerHTML = `<b>${open ? "Open now" : "Closed now"}</b>
+      <span>Studio hours: Mon – Fri ${pad2(HOURS.from)}:00 – 00:00 ${utc}</span>
+      <span>${open ? "At the desk until 00:00" : `Back ${nextOpening(now)}`}</span>
+      ${mine ? `<span>${mine}</span>` : ""}
+      <span class="status-tip-foot">Replies within 24h on weekdays</span>`;
+  }
+
   function updateStatus() {
     const now = athensNow();
     const open = HOURS.days.includes(now.day) && now.h >= HOURS.from && now.h < HOURS.to;
     driveLamp(open);
-    const clock = `${String(now.h).padStart(2, "0")}:${String(now.m).padStart(2, "0")}`;
-    $$("[data-status]").forEach((el) => (el.dataset.open = open));
+    const utc = utcOffset();
+    const clock = `${pad2(now.h)}:${pad2(now.m)}`;
+    $$("[data-status]").forEach((el) => { el.dataset.open = open; statusTip(el, open, now, utc); });
     $$("[data-status-text]").forEach((el) => {
       el.innerHTML = open
-        ? `Open now <span class="status-text-long">· ${clock} Athens</span>`
-        : `Closed <span class="status-text-long">· ${clock} Athens</span>`;
+        ? `Open now <span class="status-text-long">· ${clock} ${utc}</span>`
+        : `Closed <span class="status-text-long">· ${clock} ${utc}</span>`;
     });
     const sign = $("[data-sign]");
     if (sign) {
       sign.dataset.open = open;
-      $("[data-clock]", sign).textContent = `${clock} Athens`;
+      $("[data-clock]", sign).textContent = `${clock} ${utc}`;
       $("[data-sign-word]", sign).textContent = open ? "Open" : "Closed";
       $("[data-sign-note]", sign).textContent = open
         ? "I'm at the desk. Send your request now."
