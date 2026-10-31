@@ -2,8 +2,11 @@
 // an excerpt of a real result. Every result says what it ran on. No made-up inputs.
 // Keys are the prompt ids in prompts.js. "used: true" shows the "Used in my work" badge.
 window.PROMPT_PROOF_RUN = "Claude Opus 5.5 · 31 Oct 2026";
+// shown inside every "See a real result"
+window.PROMPT_PROOF_NOTE = "Demo run. I ran this prompt on my own site and tools only to show you a real example: it did its part in auditing this site. It's not client work.";
 window.PROMPT_PROOF = {
   "ux-quick-scan": {
+    fixed: "Fixed since this run: 1, 2 and 4 (smaller masthead, an Email me button in the hero, Ask about this is a button).",
     used: true,
     why: "It starts by naming the page's one goal, so every issue is judged against that goal, not against taste. \"Point to the exact element\" rules out vague advice.",
     result: { on: "gglias.github.io/afterhours, home page, desktop 1280 px", text: `Goal: get a visitor to email Greg about an audit or a build.
@@ -20,6 +23,7 @@ window.PROMPT_PROOF = {
 Ship this week: 2, 4, and the smaller masthead from 1.` },
   },
   "a11y-first-pass": {
+    fixed: "Fixed since this run: all five issues.",
     used: true,
     why: "It only asks for what the model can actually see, and makes \"can't tell from this\" an allowed answer, so it doesn't invent problems.",
     result: { on: "gglias.github.io/afterhours, home page HTML + CSS, dark theme", text: `issue · where · WCAG criterion · fix
@@ -31,6 +35,7 @@ Small tap target · "Ask about this" link, about 13 px high · 2.5.8 · at least
 Can't tell from this · whether the 3D desk can be turned with the keyboard` },
   },
   "microcopy-rewrite": {
+    fixed: "Fixed since this run: See services, the price line, the note under Closed and the lamp button.",
     used: true,
     why: "The before · after · why table makes every change easy to accept or reject one by one.",
     result: { on: "gglias.github.io/afterhours, button and helper texts", text: `before · after · why
@@ -74,6 +79,7 @@ Right keyboards · Email (email), Link (url) · ok · keep
 Link is optional · Link · ok · keep it optional: many leads have no site yet` },
   },
   "mobile-thumb-check": {
+    fixed: "Fixed since this run: 1 and 2 (the offer comes first on phones, 44 px targets).",
     used: true,
     why: "It gives the model concrete limits (44 px, 16 px, the bottom half) instead of asking whether it \"feels\" usable.",
     result: { on: "gglias.github.io/afterhours at 375 px", text: `Main action: email Greg.
@@ -151,6 +157,7 @@ Near-duplicates: radius 20 and 22 → keep 22.
 { "color": { "bg": "#09090a", "card": "#121214", "text": "#f3f3f1", "muted": "#9b9ba1", "accent": "#ff5b1f", "select": "#0d99ff" } }` },
   },
   "a11y-fix-it": {
+    fixed: "Applied on this site since this run.",
     used: true,
     why: "It asks for the whole fixed code plus a one-line reason for each change, so you learn the fix instead of just pasting it.",
     result: { on: "the \"Ask about this\" link from a service card on gglias.github.io/afterhours", text: `Fixed code:

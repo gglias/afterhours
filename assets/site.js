@@ -2,7 +2,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const TZ = "Europe/Athens";
-  // Open Mon–Fri, 19:00–24:00 Athens time.
+  // Open Mon–Fri, 19:00–24:00 studio time (Europe/Athens, UTC+2 / UTC+3).
   const HOURS = { days: [1, 2, 3, 4, 5], from: 19, to: 24 };
   const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -91,7 +91,7 @@
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* Open / Closed, Athens time */
+  /* Open / Closed, studio time */
   function athensNow() {
     const parts = new Intl.DateTimeFormat("en-GB", {
       timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
@@ -119,7 +119,7 @@
     lampOn = on;
     if (!lampBtn) return;
     lampBtn.setAttribute("aria-pressed", on);
-    lampBtn.textContent = on ? "Lights off" : "Lights on";
+    lampBtn.textContent = on ? "Turn the lamp off" : "Turn the lamp on";
   }
   function driveLamp(open) {
     if (!lampFrame) return;
@@ -201,7 +201,7 @@
       $("[data-sign-word]", sign).textContent = open ? "Open" : "Closed";
       $("[data-sign-note]", sign).textContent = open
         ? "I'm at the desk. Send your request now."
-        : `Back ${nextOpening(now)}. Leave a note, I'll reply then.`;
+        : `Back ${nextOpening(now)}. Email me, I'll reply then.`;
     }
   }
   updateStatus();
@@ -222,8 +222,10 @@
       <pre>${esc(p.text)}</pre>
       ${r ? `<details class="prompt-result">
         <summary>See a real result</summary>
+        ${window.PROMPT_PROOF_NOTE ? `<p class="prompt-demo">${esc(window.PROMPT_PROOF_NOTE)}</p>` : ""}
         <p class="tiny">Ran on ${esc(r.on)} · ${esc(window.PROMPT_PROOF_RUN || "")}</p>
         <pre>${esc(r.text)}</pre>
+        ${proof.fixed ? `<p class="prompt-fixed">${esc(proof.fixed)}</p>` : ""}
       </details>` : ""}
       <div class="prompt-foot"><span class="tiny">Paste into Claude</span><button class="btn btn-sm" type="button" data-copy="${esc(p.text)}">Copy prompt</button></div>
     </article>`;
