@@ -85,6 +85,28 @@
     if ("ResizeObserver" in window) new ResizeObserver(measure).observe(frame);
   }
 
+  /* Mobile menu: burger opens a panel with the anchor links; a link, Esc or a tap outside closes it */
+  const burger = $("[data-burger]");
+  const mnav = $("[data-mnav]");
+  if (burger && mnav) {
+    const setMenu = (open) => {
+      burger.setAttribute("aria-expanded", open);
+      burger.setAttribute("aria-label", open ? "Close menu" : "Menu");
+      if (open) {
+        mnav.hidden = false;
+        requestAnimationFrame(() => mnav.classList.add("is-open"));
+      } else {
+        mnav.classList.remove("is-open");
+        setTimeout(() => { if (burger.getAttribute("aria-expanded") === "false") mnav.hidden = true; }, 200);
+      }
+    };
+    burger.addEventListener("click", (e) => { e.stopPropagation(); setMenu(burger.getAttribute("aria-expanded") !== "true"); });
+    mnav.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("click", (e) => { if (!mnav.hidden && !mnav.contains(e.target)) setMenu(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !mnav.hidden) { setMenu(false); burger.focus(); } });
+    matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
+  }
+
   /* Header border on scroll */
   const header = $(".site-header");
   const onScroll = () => header && header.classList.toggle("is-scrolled", scrollY > 8);
