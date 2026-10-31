@@ -169,7 +169,7 @@
   setInterval(updateStatus, 30000);
 
   /* Prompts */
-  const CAT = { ux: "UX", copy: "Copy", build: "Build" };
+  const CAT = { ux: "UX", copy: "Copy", build: "Build", research: "Research" };
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function promptCard(p) {
     return `<article class="prompt surface reveal" data-cat="${p.cat}">
