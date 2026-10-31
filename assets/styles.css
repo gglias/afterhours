@@ -265,9 +265,21 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
 .prompt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .prompt { display: flex; flex-direction: column; border-radius: var(--radius-l); padding: 20px; }
 .prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.prompt-head .tiny { color: var(--faint); }
+.prompt-head .tiny { color: var(--muted); white-space: nowrap; }
 .prompt h3 { margin: 16px 0 8px; font-size: 1.45rem; }
 .prompt-desc { font-size: 14.5px; color: var(--muted); }
+.prompt-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-used { display: inline-flex; align-items: center; gap: 6px; background: rgb(74 222 128 / 0.1); color: var(--text-2); }
+.tag-used::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+.prompt-why { margin-top: 12px; padding: 10px 12px; border-radius: var(--radius-m); background: var(--fill); border: 1px solid var(--line); font-size: 13.5px; line-height: 1.5; color: var(--text-2); }
+.prompt-why span { display: block; margin-bottom: 4px; font: 400 11px/1.2 var(--font-mono); color: var(--muted); }
+.prompt-result { margin-top: 12px; border-radius: var(--radius-m); border: 1px solid rgb(13 153 255 / 0.35); background: rgb(13 153 255 / 0.06); }
+.prompt-result summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 10px 12px; font: 600 13px/1.2 var(--font-body); color: var(--select-ink); }
+.prompt-result summary::-webkit-details-marker { display: none; }
+.prompt-result summary::before { content: "+"; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; background: rgb(13 153 255 / 0.16); font: 500 13px/1 var(--font-body); transition: transform .2s var(--ease); }
+.prompt-result[open] summary::before { transform: rotate(45deg); }
+.prompt-result .tiny { padding: 0 12px; }
+.prompt-result pre { margin: 10px 12px 12px; max-height: 320px; }
 .prompt pre {
   margin: 16px 0 0; padding: 14px; max-height: 220px; overflow: auto; border-radius: var(--radius-m); background: var(--bg-2); border: 1px solid var(--line);
   font: 400 12.5px/1.6 var(--font-mono); color: var(--text-2); white-space: pre-wrap; word-break: break-word;

@@ -171,12 +171,21 @@
   /* Prompts */
   const CAT = { ux: "UX", copy: "Copy", build: "Build", research: "Research" };
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  // proof (prompts-proof.js): "Used in my work", why it works, and a real result where there was one to run
   function promptCard(p) {
+    const proof = (window.PROMPT_PROOF || {})[p.id] || {};
+    const r = proof.result;
     return `<article class="prompt surface reveal" data-cat="${p.cat}">
-      <div class="prompt-head"><span class="tag">${CAT[p.cat] || p.cat}</span><span class="tiny">${p.text.length} chars</span></div>
+      <div class="prompt-head"><span class="prompt-tags"><span class="tag">${CAT[p.cat] || p.cat}</span>${proof.used ? `<span class="tag tag-used">Used in my work</span>` : ""}</span><span class="tiny">${p.text.length} chars</span></div>
       <h3>${esc(p.title)}</h3>
       <p class="prompt-desc">${esc(p.desc)}</p>
+      ${proof.why ? `<p class="prompt-why"><span>Why it works</span>${esc(proof.why)}</p>` : ""}
       <pre>${esc(p.text)}</pre>
+      ${r ? `<details class="prompt-result">
+        <summary>See a real result</summary>
+        <p class="tiny">Ran on ${esc(r.on)} · ${esc(window.PROMPT_PROOF_RUN || "")}</p>
+        <pre>${esc(r.text)}</pre>
+      </details>` : ""}
       <div class="prompt-foot"><span class="tiny">Paste into Claude</span><button class="btn btn-sm" type="button" data-copy="${esc(p.text)}">Copy prompt</button></div>
     </article>`;
   }
