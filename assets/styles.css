@@ -361,7 +361,7 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
 @media (max-width: 560px) {
   .brand small, .status-text-long { display: none; }
   .gg-switch button { width: 44px; height: 44px; }
-  .header-tools .status { height: 50px; }
+  .header-tools .status { display: none; }
   .btn-sm { min-height: 44px; padding: 10px 14px; }
   .mast-top { margin-bottom: 36px; }
   .mast-sub { margin-top: 48px; }
