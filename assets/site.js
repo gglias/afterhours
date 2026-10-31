@@ -1,7 +1,6 @@
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const EMAIL = "gglias.pro@gmail.com";
   const TZ = "Europe/Athens";
   // Open Mon–Fri, 19:00–24:00 Athens time.
   const HOURS = { days: [1, 2, 3, 4, 5], from: 19, to: 24 };
@@ -46,17 +45,29 @@
     setTimeout(() => (btn.textContent = label), 1400);
   });
 
-  /* Theme */
-  const themeBtn = $("[data-theme-toggle]");
-  if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-      const root = document.documentElement;
-      const isDark = root.dataset.theme
-        ? root.dataset.theme === "dark"
-        : matchMedia("(prefers-color-scheme: dark)").matches;
-      root.dataset.theme = isDark ? "light" : "dark";
-      store.set("ah-theme", root.dataset.theme);
-    });
+  /* Theme: dark is home, light is the same system on paper */
+  const themeBtns = $$("[data-set-theme]");
+  const showTheme = () => {
+    const light = document.documentElement.dataset.theme === "light";
+    themeBtns.forEach((b) => b.setAttribute("aria-pressed", (b.dataset.setTheme === "light") === light));
+  };
+  themeBtns.forEach((b) => b.addEventListener("click", () => {
+    const root = document.documentElement;
+    if (b.dataset.setTheme === "light") root.dataset.theme = "light";
+    else delete root.dataset.theme;
+    store.set("ah-theme", b.dataset.setTheme);
+    showTheme();
+  }));
+  showTheme();
+
+  /* Selection frame: live W × H, like Figma */
+  const frame = $("[data-frame]");
+  if (frame) {
+    const size = $("[data-frame-size]", frame);
+    const measure = () => { const r = frame.getBoundingClientRect(); size.textContent = `${Math.round(r.width)} × ${Math.round(r.height)}`; };
+    measure();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    if ("ResizeObserver" in window) new ResizeObserver(measure).observe(frame);
   }
 
   /* Header border on scroll */
@@ -146,7 +157,7 @@
   const CAT = { ux: "UX", copy: "Copy", build: "Build" };
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function promptCard(p) {
-    return `<article class="prompt reveal" data-cat="${p.cat}">
+    return `<article class="prompt surface reveal" data-cat="${p.cat}">
       <div class="prompt-head"><span class="tag">${CAT[p.cat] || p.cat}</span><span class="tiny">${p.text.length} chars</span></div>
       <h3>${esc(p.title)}</h3>
       <p class="prompt-desc">${esc(p.desc)}</p>
@@ -171,130 +182,10 @@
     });
   });
   $$("[data-made]").forEach((grid) => {
-    grid.innerHTML = (window.MADE || []).map((m) => `<a class="made reveal" href="${m.href}">
+    grid.innerHTML = (window.MADE || []).map((m) => `<a class="made surface reveal" href="${m.href}">
       <div class="made-art" aria-hidden="true">${esc(m.art)}</div>
       <h3>${esc(m.title)}</h3><p>${esc(m.desc)}</p><span class="arrow">→</span></a>`).join("");
   });
-
-  /* Receipt */
-  const receipt = $("#receipt");
-  if (receipt) {
-    const eur = (n) => "€" + Math.round(n).toLocaleString("en-US");
-    const linesEl = $("[data-lines]", receipt);
-    const emptyEl = $("[data-empty]", receipt);
-    const founding = $("[data-founding]", receipt);
-    const send = $("[data-send]", receipt);
-    const mailLink = $("[data-send-mail]", receipt);
-    const bar = $("[data-receipt-bar]");
-    let request = {};                                  // what the brief holds, handed to the form as hidden fields
-    const items = $$("[data-item]");
-    const picked = new Set((store.get("ah-receipt") || "").split(",").filter(Boolean));
-    founding.checked = store.get("ah-founding") === "1";
-
-    $("[data-order]", receipt).textContent = String(Math.floor(1000 + Math.random() * 9000));
-    $("[data-date]", receipt).textContent = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
-
-    function render() {
-      const chosen = items.filter((el) => picked.has(el.dataset.item));
-      items.forEach((el) => {
-        const on = picked.has(el.dataset.item);
-        el.classList.toggle("is-selected", on);
-        const b = $(".add-btn", el);
-        b.setAttribute("aria-pressed", on);
-        b.textContent = on ? "Added ✓" : "Add to brief";
-      });
-
-      linesEl.innerHTML = chosen.map((el) => {
-        const from = el.hasAttribute("data-from") ? "from " : "";
-        const unit = el.dataset.unit || "";
-        return `<li><span>${esc(el.dataset.name)}</span><span>${from}${eur(+el.dataset.price)}${unit}</span>
-          <button type="button" data-remove="${el.dataset.item}" aria-label="Remove ${esc(el.dataset.name)}">×</button></li>`;
-      }).join("");
-      emptyEl.hidden = chosen.length > 0;
-
-      const sub = chosen.reduce((s, el) => s + +el.dataset.price, 0);
-      const disc = founding.checked ? sub * 0.25 : 0;
-      const anyFrom = chosen.some((el) => el.hasAttribute("data-from"));
-      const monthly = chosen.some((el) => el.dataset.unit);
-      $("[data-subtotal]", receipt).textContent = eur(sub);
-      $("[data-discount-row]", receipt).hidden = !disc;
-      $("[data-discount]", receipt).textContent = "−" + eur(disc);
-      $("[data-total]", receipt).textContent = (anyFrom ? "from " : "") + eur(sub - disc);
-      $("[data-total-label]", receipt).textContent = monthly ? "Total (1st month)" : "Total";
-
-      const body = [
-        "Hi Greg,",
-        "",
-        "I'm interested in:",
-        ...chosen.map((el) => `- ${el.dataset.name} (${el.hasAttribute("data-from") ? "from " : ""}${eur(+el.dataset.price)}${el.dataset.unit || ""})`),
-        founding.checked ? "- Founding client −25% (happy to give a testimonial)" : "",
-        "",
-        `Estimated total: ${(anyFrom ? "from " : "") + eur(sub - disc)}`,
-        "",
-        "About my product:",
-        "Link:",
-        "What I want to improve:",
-        "",
-      ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
-      if (mailLink) mailLink.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Inquiry: ${chosen.map((el) => el.dataset.name).join(", ") || "After hours"}`)}&body=${encodeURIComponent(body)}`;
-      // the form: a popup over the page (Tally widget); without the widget the link opens the form in a new tab
-      request = {
-        services: chosen.map((el) => `${el.dataset.name} (${el.hasAttribute("data-from") ? "from " : ""}${eur(+el.dataset.price)}${el.dataset.unit || ""})`).join("; "),
-        total: (anyFrom ? "from " : "") + eur(sub - disc) + (monthly ? " (1st month)" : ""),
-        founding: founding.checked ? "yes" : "no",
-      };
-      send.href = `https://tally.so/r/${send.dataset.tally}?${new URLSearchParams(request)}`;
-      send.setAttribute("aria-disabled", chosen.length ? "false" : "true");
-      send.classList.toggle("is-disabled", !chosen.length);
-
-      if (bar) {
-        $("[data-bar-text]", bar).textContent = `${chosen.length} item${chosen.length === 1 ? "" : "s"} · ${(anyFrom ? "from " : "") + eur(sub - disc)}`;
-        bar.classList.toggle("is-visible", chosen.length > 0 && !receiptInView);
-      }
-      store.set("ah-receipt", [...picked].join(","));
-      store.set("ah-founding", founding.checked ? "1" : "0");
-    }
-
-    let receiptInView = false;
-    if ("IntersectionObserver" in window && bar) {
-      new IntersectionObserver(([e]) => {
-        receiptInView = e.isIntersecting;
-        bar.classList.toggle("is-visible", picked.size > 0 && !receiptInView);
-      }).observe(receipt);
-    }
-
-    items.forEach((el) => {
-      $(".add-btn", el).addEventListener("click", () => {
-        const id = el.dataset.item;
-        if (picked.has(id)) picked.delete(id);
-        else { picked.add(id); toast(`${el.dataset.name} added`); }
-        render();
-      });
-    });
-    linesEl.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-remove]");
-      if (!b) return;
-      picked.delete(b.dataset.remove);
-      render();
-    });
-    founding.addEventListener("change", render);
-    send.addEventListener("click", (e) => {
-      if (!picked.size) { e.preventDefault(); toast("Add something from the menu first"); return; }
-      if (!window.Tally || !Tally.openPopup) return;
-      e.preventDefault();
-      Tally.openPopup(send.dataset.tally, {
-        layout: "modal",
-        width: 560,
-        hiddenFields: request,
-        autoClose: 4000,
-        onSubmit: () => toast("Inquiry sent. I'll reply within 24h on weekdays."),
-      });
-    });
-    if (mailLink) mailLink.addEventListener("click", (e) => {
-      if (!picked.size) { e.preventDefault(); toast("Add something from the menu first"); }
-    });
-    render();
-  }
 
   /* Reveal on scroll */
   const reveals = $$(".reveal");
