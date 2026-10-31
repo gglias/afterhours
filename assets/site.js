@@ -45,7 +45,7 @@
     setTimeout(() => (btn.textContent = label), 1400);
   });
 
-  /* Theme: dark is home, light is the same system on paper */
+  /* Theme: light by default; dark when the visitor picks it (remembered) */
   const themeBtns = $$("[data-set-theme]");
   const showTheme = () => {
     const light = document.documentElement.dataset.theme === "light";
