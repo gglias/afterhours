@@ -239,7 +239,11 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   transition: border-color .2s, transform .25s var(--ease), box-shadow .2s;
 }
 .svc:hover { border-color: var(--select); transform: translateY(-2px); box-shadow: 0 14px 30px -18px var(--shadow-c); }
-.svc-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.svc-top { display: flex; align-items: center; gap: 10px; }
+.svc-top .tag { margin-left: auto; }
+.svc-ic { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: var(--radius-s); background: var(--fill); border: 1px solid var(--line); color: var(--text); transition: background .2s, border-color .2s, color .2s; }
+.svc-ic svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.svc:hover .svc-ic { background: var(--select); border-color: var(--select); color: #fff; }
 .toc-no { font: 400 11.5px/1 var(--font-mono); color: var(--accent); }
 .tag { display: inline-block; padding: 4px 7px; border-radius: var(--radius-xs); background: var(--fill); color: var(--text-2); font: 400 11px/1 var(--font-mono); white-space: nowrap; }
 .svc h4 { margin: 18px 0 10px; font-size: 1.6rem; line-height: 1; }
