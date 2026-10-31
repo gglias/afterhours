@@ -137,7 +137,7 @@ h3 { font-size: 1.6rem; line-height: 1; }
 .nav a:hover { background: var(--fill); color: var(--text); }
 .nav a[aria-current="page"] { background: rgb(13 153 255 / 0.13); color: var(--text); }
 .header-tools { display: flex; align-items: center; gap: 8px; }
-.status { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border-radius: var(--radius-m); background: var(--fill); border: 1px solid var(--line); font: 400 11.5px/1 var(--font-mono); color: var(--text-2); white-space: nowrap; }
+.status { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border-radius: var(--radius-m); background: var(--fill); border: 1px solid var(--line); font: 400 11.5px/1 var(--font-mono); color: var(--text-2); white-space: nowrap; }
 .status { position: relative; cursor: default; }
 .status-tip { display: none; }
 @media (hover: hover) and (min-width: 900px) {
@@ -361,6 +361,7 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
 @media (max-width: 560px) {
   .brand small, .status-text-long { display: none; }
   .gg-switch button { width: 44px; height: 44px; }
+  .header-tools .status { height: 50px; }
   .btn-sm { min-height: 44px; padding: 10px 14px; }
   .mast-top { margin-bottom: 36px; }
   .mast-sub { margin-top: 48px; }
