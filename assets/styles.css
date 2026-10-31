@@ -193,14 +193,14 @@ h3 { font-size: 1.6rem; line-height: 1; }
 .copy-line code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 13px/1 var(--font-mono); color: var(--text-2); }
 
 /* availability: Available / Limited availability / Fully booked (assets/availability.js) */
-.avail { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-top: 22px; padding: 8px 12px; border-radius: var(--radius-m); background: var(--fill); border: 1px solid var(--line); font: 400 12px/1.2 var(--font-mono); color: var(--muted); }
+.avail { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-top: 22px; font: 400 12px/1.2 var(--font-mono); color: var(--muted); }
 .avail:empty { display: none; }
 .avail b { font: 600 13px/1 var(--font-body); color: var(--text); }
 .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px rgb(74 222 128 / 0.16); flex: none; }
 .avail[data-state="limited"] .avail-dot { background: var(--warn); box-shadow: 0 0 0 3px rgb(251 191 36 / 0.18); }
 .avail[data-state="booked"] .avail-dot { background: var(--bad); box-shadow: 0 0 0 3px rgb(248 113 113 / 0.18); }
 .contact .avail { margin-top: 20px; }
-.avail-mast { margin: 0; padding: 7px 11px; }
+.avail-mast { margin: 0; }
 
 /* the desk: transparent, on the canvas */
 .studio { display: grid; gap: 4px; }
