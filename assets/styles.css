@@ -185,6 +185,7 @@ body:has(.masthead) .header-tools .status { display: none; }
 .avail[data-state="limited"] .avail-dot { background: var(--warn); box-shadow: 0 0 0 3px rgb(251 191 36 / 0.18); }
 .avail[data-state="booked"] .avail-dot { background: var(--bad); box-shadow: 0 0 0 3px rgb(248 113 113 / 0.18); }
 .contact .avail { margin-top: 20px; }
+.avail-mast { margin: 0; padding: 7px 11px; }
 
 /* the desk: transparent, on the canvas */
 .studio { display: grid; gap: 4px; }
