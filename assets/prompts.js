@@ -3,6 +3,67 @@
 // cat: "ux" | "copy" | "build" | "research"
 window.PROMPTS = [
   {
+    id: "website-ux-report",
+    cat: "ux",
+    title: "Website UX report",
+    desc: "My full report for any website: pages, copy, CTAs, menu and structure, desktop vs mobile, UI and the tech it's built on. Ends as a minimal PDF with recommendations.",
+    text: `You are a senior UX designer writing a UX report on a website for a client.
+
+Website: [URL]
+What the business does and the site's main goal: [e.g. "B2B SaaS, get demo requests"]
+Who visits it: [audience]
+Scope: [all main pages, or "up to 15 pages"]
+Report language: [English]
+
+How to work
+- Visit the site yourself: the homepage, every item in the main menu and the footer, and the key flows (contact, sign-up, checkout, booking). Check each page at desktop width (1440 px) and mobile width (390 px).
+- If you can't load a page or see the mobile view, write "Not checked". Never guess.
+- Base every statement on what you saw and mark it: [Seen] on the page, [Code] in the HTML or source, [Inferred] your reading of it.
+- Quote copy word for word, in quotes.
+
+1. Overview
+One paragraph: what the site is, who it's for, what it asks visitors to do, and your verdict in one sentence.
+
+2. Technology
+What it's built with: custom, WordPress (theme and page builder, e.g. Elementor), Shopify, Webflow, Wix, Squarespace, Framer, React / Next.js, Vue / Nuxt, or other. Give the evidence for each (e.g. "/wp-content/ in asset URLs", "generator meta tag", "__NEXT_DATA__ script", "cdn.shopify.com"). List the tools you can see: analytics, chat, cookie banner, forms, fonts. If unsure, write "Likely …" and why.
+
+3. Navigation and structure
+- Main menu: every item in order, with sub-items, and where each one goes.
+- Footer and utility links (login, language, search, cart).
+- A site map as a tree of the pages you found (max 3 levels).
+- Problems: unclear labels, too many items, dead ends, pages only reachable from the footer, broken links.
+
+4. Page inventory
+A table, one row per page: page · URL · purpose · H1 (word for word) · primary CTA · secondary CTA.
+
+5. Page by page
+For each important page:
+- Purpose, and who it's for.
+- Structure: the sections from top to bottom, one line each.
+- Copy: headline and subheadline word for word. Is the value clear in 5 seconds? Tone, length, jargon.
+- CTAs: label (word for word), where it goes, where it sits, how it looks. Is there one clear next step?
+- Desktop: what works and what doesn't.
+- Mobile: what changes (menu, layout, order, hidden content), tap targets under 44 px, text under 16 px, anything that breaks or overflows.
+
+6. UI and visual design
+Typography (families, sizes, hierarchy), colour (palette, contrast below WCAG 2.2 AA), spacing and grid, imagery, components (buttons, cards, forms) and how consistent they are across pages.
+
+7. Accessibility and quick technical checks
+Only what you can see or read in the code: contrast, alt text, heading order, focus states, form labels, page titles and meta descriptions, very heavy images, layout shift. No scores you didn't measure.
+
+8. Findings
+A table: # · finding · page · desktop / mobile / both · severity (high / medium / low) · evidence.
+
+9. Recommendations
+For every finding: what to change, why it matters for the site's goal, impact (high / medium / low) and effort (S / M / L). Then two short lists:
+- Quick wins: high impact, small effort, doable this week.
+- Bigger bets: changes that need design or development time.
+
+Output
+Create the report as a print-ready PDF (A4, portrait), minimal and light: white background, one sans-serif font, black text with one accent colour, generous margins, page numbers, no decorative images. Start with a cover (site name, URL, date, "UX report"), then a short table of contents, then sections 1–9 in this order, with tables where this prompt asks for them.
+If you can't create a PDF file, write the whole report as one HTML file with print CSS (@page A4) that I can save as PDF from the browser.`,
+  },
+  {
     id: "ux-quick-scan",
     cat: "ux",
     title: "5-minute UX quick scan",

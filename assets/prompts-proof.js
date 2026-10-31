@@ -5,6 +5,10 @@ window.PROMPT_PROOF_RUN = "Claude Opus 5.5 · 31 Oct 2026";
 // shown inside every "See a real result"
 window.PROMPT_PROOF_NOTE = "Demo run. I ran this prompt on my own site and tools only to show you a real example: it did its part in auditing this site. It's not client work.";
 window.PROMPT_PROOF = {
+  "website-ux-report": {
+    used: true,
+    why: "It forces evidence: every statement is marked [Seen], [Code] or [Inferred], copy is quoted word for word, and whatever it couldn't check says \"Not checked\". The fixed order of sections makes every report comparable, and the output spec turns it into a client-ready PDF in one go.",
+  },
   "ux-quick-scan": {
     fixed: "Fixed since this run: 1, 2 and 4 (smaller masthead, an Email me button in the hero, Ask about this is a button).",
     used: true,
